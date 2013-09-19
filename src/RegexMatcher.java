@@ -10,6 +10,13 @@ import com.google.gson.Gson;
 
 
 public class RegexMatcher {
+	public static Pattern patternGen11Organization =
+			Pattern.compile("๑.๑\\s+ชื่อหน่วยงาน\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"เว็บไซด์\\s+\\(Website\\)\\s+(\\S*)\\s+");
+
+	public static List<String> gen11Organization = Arrays.asList(
+			"gen_1_1_name", "gen_1_1_website");
+	
 	public static Pattern patternGen13Address =
 			Pattern.compile("๑.๓\\s+\\S*\\s+เลขที่\\s+(\\S*)\\s+" +
 					"หมู่ที่\\s+(\\S*)\\s+" +
@@ -176,6 +183,7 @@ public class RegexMatcher {
 	public static Map<String, Object> allData = new HashMap<String, Object>();
 	
 	public static String extractAllData(String text){
+		extractData(patternGen11Organization, text, gen11Organization, "gen_1_1_organization");
 //		extractData(patternGen13Address, text, gen13Address, "gen_1_3_address");
 //		extractData(patternGen14Place, text, gen14Place, "gen_1_4_place");
 //		extractData(patternGen15Owner, text, gen15Owner, "gen_1_5_owner");
