@@ -78,7 +78,7 @@ public class RegexMatcher {
 			"gen_1_5_province", "gen_1_5_zipcode");
 	
 	public static Pattern patternGen16Attorney =
-			Pattern.compile("๑.๖\\s+\\S*\\s+ชื่อ-นามสกุล\\s+(\\S*[\\s\\S+]*)\\s+" +
+			Pattern.compile("๑.๖\\s+\\S*\\s+ชื่อ-นามสกุล\\s+(\\S*[\\s\\S+]*?)\\s+" +
 					"ตำแหน่ง\\s+(\\S*)\\s+" +
 					"โทรศัพท์\\s+([\\d|-]*[\\s+[\\d|-]+]*)\\s+" +
 					"โทรสาร\\s+([\\d|-]*[\\s+[\\d|-]+]*)\\s+" +
@@ -91,7 +91,7 @@ public class RegexMatcher {
 					"จังหวัด\\s+(\\S*)\\s+" +
 					"อยู่บ้านเลขที่\\s+(\\S*)\\s+" +
 					"หมู่ที่\\s+(\\S*)\\s+" +
-					"ตรอก/ซอย\\s+(\\S*)\\s+" +
+					"ตรอก/ซอย\\s+(\\S*[\\s\\S+]*?)\\s+" +
 					"ถนน\\s+(\\S*[\\s\\S+]*?)\\s+" +
 					"ตำบล/แขวง\\s+(\\S*[\\s\\S+]*?)\\s+" +
 					"อำเภอ/เขต\\s+(\\S*[\\s\\S+]*?)\\s+" +
@@ -120,27 +120,84 @@ public class RegexMatcher {
 	
 	public static Pattern patternName =
 			Pattern.compile("๒.๑\\s+ชื่อโครงการ\\s+(\\S*[\\s\\S+]*)\\s+๒.๒");
-
-	public static List<String> genName = Arrays.asList("gen_1_7_name");
 	
+	public static Pattern patternGen22Principle =
+			Pattern.compile("๒.๒\\s+หลักการและเหตุผลความจำเป็น\\s+(\\S*[\\s\\S+]*)\\s+๒.๓[^.]");
+
+	public static Pattern patternGen23Content =
+			Pattern.compile("๒.๓.๑\\s+วัตถุประสงค์ของโครงการ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๒\\s+เป้าหมายของโครงการ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๓\\s+แผนและระยะเวลาการดำเนินงาน\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๔\\s+การบริหารจัดการโครงการ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๕\\s+รายละเอียด ขอบเขต และกิจกรรมการดำเนินงาน\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๖\\s+รายละเอียดด้านเทคนิค\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๗\\s+ผลตอบแทนการลงทุน\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๘\\s+วงเงินขอรับการส่งเสริมและสนับสนุนจากกองทุน\\s+" +
+					"\\(โปรดแสดงรายละเอียดค่าใช้จ่าย\\s+ในการดำเนินงาน\\s+พร้อมทั้งสมมุติฐาน" +
+					"การประมาณการทางการเงินและเอกสารอ้างอิงที่เกี่ยวข้อง\\)\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๙\\s+ผลประโยชน์และผลที่คาดว่าจะได้รับ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๑๐\\s+ตัวชี้วัดผลผลิตและผลลัพธ์\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๓.๑๑\\s+ผลกระทบของโครงการ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๔");
+	
+	public static List<String> gen23Content = Arrays.asList(
+			"gen_2_3_1_objective",
+			"gen_2_3_2_target",
+			"gen_2_3_3_plan",
+			"gen_2_3_4_management",
+			"gen_2_3_5_scope",
+			"gen_2_3_6_technical_detail",
+			"gen_2_3_7_compensation",
+			"gen_2_3_8_request_budget",
+			"gen_2_3_9_benefit",
+			"gen_2_3_10_indicator",
+			"gen_2_3_11_impact");
+	
+	public static Pattern patternGen253Readiness =
+			Pattern.compile("\\(๑\\)\\s+พื้นที่\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"\\(๒\\)\\s+บุคลากร\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"\\(๓\\)\\s+งบประมาณสมทบ\\s+\\(ถ้ามี\\)\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"\\(๔\\)\\s+การบริหารจัดการ\\s+(\\S*[\\s\\S+]*)\\s+" +
+					"๒.๖");
+	
+	public static List<String> gen253Readiness = Arrays.asList(
+			"gen_2_5_3_readiness_area",
+			"gen_2_5_3_readiness_people",
+			"gen_2_5_3_readiness_budget",
+			"gen_2_5_3_readiness_management");
+	
+	public static Pattern patternGen26Risk =
+			Pattern.compile("๒.๖\\s+การประเมินความเสี่ยงของโครงการ\\s+(\\S*[\\s\\S+]*)\\s+๒.๗");
+
+	public static Pattern patternGen27Completeness =
+			Pattern.compile("๒.๗\\s+ความสมบูรณ์และความเชื่อมโยงกับโครงการอื่น\\s+(\\S*[\\s\\S+]*)\\s+๓.๑");
+
+
 	public static Map<String, Object> allData = new HashMap<String, Object>();
 	
-	public static void extractAllData(String text){
-		extractData(patternGen13Address, text, gen13Address, "gen_1_3_address");
-		extractData(patternGen14Place, text, gen14Place, "gen_1_4_place");
-		extractData(patternGen15Owner, text, gen15Owner, "gen_1_5_owner");
-		extractData(patternGen16Attorney, text, gen16Attorney, "gen_1_6_attorney");
-		extractData(patternGen17ContactPerson, text, gen17ContactPerson, "gen_1_7_contact_person");
+	public static String extractAllData(String text){
+//		extractData(patternGen13Address, text, gen13Address, "gen_1_3_address");
+//		extractData(patternGen14Place, text, gen14Place, "gen_1_4_place");
+//		extractData(patternGen15Owner, text, gen15Owner, "gen_1_5_owner");
+//		extractData(patternGen16Attorney, text, gen16Attorney, "gen_1_6_attorney");
+//		extractData(patternGen17ContactPerson, text, gen17ContactPerson, "gen_1_7_contact_person");
+//		
+//		extractSingleData(patternName, text, "name");
+//		extractSingleData(patternGen22Principle, text, "gen_2_2_principle");
+//		extractData(patternGen23Content, text, gen23Content, "gen_2_3_content");
 		
-		extractSingleData(patternName, text, "name");
+		extractData(patternGen253Readiness, text, gen253Readiness, "gen_2_5_3_readiness");
+		extractSingleData(patternGen26Risk, text, "gen_2_6_risk");
+		extractSingleData(patternGen27Completeness, text, "gen_2_7_completeness");
 		
-		convertMapToJson(allData);
+		return convertMapToJson(allData);
 	}
 	
-	public static void convertMapToJson(Map<String, Object> map) {
+	public static String convertMapToJson(Map<String, Object> map) {
 		Gson gson = new Gson(); 
         String json = gson.toJson(map); 
         System.out.println(json);
+        return json;
 	}
 	
     public static void extractData(Pattern pattern, String text, List<String> columnDict, String fieldName) {
